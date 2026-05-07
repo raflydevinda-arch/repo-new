@@ -2,10 +2,10 @@ package main
 import "fmt"
 
 func main() {
-	var a, b int
-	fmt.Scan(&a, &b)
-	fmt.Println(a + b)
+	var a, c int
+	fmt.Scan(&a, &c)
+	fmt.Println(a + c)
 
 
-	fmt.Scan(&a, &b)
+	fmt.Scan(&a, &c)
 }
