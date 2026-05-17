@@ -7,6 +7,7 @@ const MAX int = 999
 type Participant struct {
 	id       int
 	name     string
+	age      int
 	interest string
 	date     string
 	active   bool
@@ -27,6 +28,9 @@ func addParticipant() {
 
 	fmt.Print("Full Name : ")
 	fmt.Scan(&p.name)
+
+	fmt.Print("Age : ")
+	fmt.Scan(&p.age)
 
 	fmt.Println(" ~ Interest Category ~")
 	fmt.Println("1. Academic")
@@ -86,7 +90,7 @@ func addParticipant() {
 
 	} else if category == 3 {
 
-		fmt.Println("=== Art / Creativity ===")
+		fmt.Println(" ~ Art / Creativity ~ ")
 		fmt.Println("1. Music")
 		fmt.Println("2. Art")
 		fmt.Println("3. Photography")
@@ -111,7 +115,6 @@ func addParticipant() {
 	p.active = true
 
 	participantData[total] = p
-
 	total = total + 1
 
 	fmt.Println("Participant successfully added")
@@ -121,7 +124,7 @@ func viewParticipants() {
 	var i int
 	var enter string
 
-	fmt.Println("---- Participant Data ----")
+	fmt.Println("---- PARTICIPANT DATA ----")
 
 	if total == 0 {
 
@@ -134,8 +137,9 @@ func viewParticipants() {
 			fmt.Println("-------------------")
 			fmt.Println("ID       :", participantData[i].id)
 			fmt.Println("Name     :", participantData[i].name)
+			fmt.Println("Age      :", participantData[i].age)
 			fmt.Println("Interest :", participantData[i].interest)
-			fmt.Println("Registration Date (D/M/Y) :", participantData[i].date)
+			fmt.Println("Registration Date :", participantData[i].date)
 		}
 	}
 
@@ -144,11 +148,12 @@ func viewParticipants() {
 	fmt.Scan(&enter)
 }
 
-func changeParticipantStatus() {
+func updateParticipant() {
 	var idSearch int
 	var i int
 	var found bool
-	fmt.Println("---- Change Participant Status ----")
+
+	fmt.Println("---- UPDATE PARTICIPANT ----")
 
 	fmt.Print("ID Registration : ")
 	fmt.Scan(&idSearch)
@@ -156,21 +161,28 @@ func changeParticipantStatus() {
 	found = false
 
 	for i = 0; i < total; i++ {
+
 		if participantData[i].id == idSearch {
 
-			fmt.Print("New Name :")
-			fmt.Scan(&participantData[i].name)
+			fmt.Print("New Age : ")
+			fmt.Scan(&participantData[i].age)
 
-			fmt.Print("New Interest :")
+			fmt.Print("New Interest : ")
 			fmt.Scan(&participantData[i].interest)
 
-			fmt.Print("New Date (D/M/Y) :")
+			fmt.Print("New Date (D/M/Y) : ")
 			fmt.Scan(&participantData[i].date)
 
 			found = true
 		}
 	}
+
 	if found == true {
+
+		fmt.Println("Participant successfully updated")
+
+	} else {
+
 		fmt.Println("Participant not found")
 	}
 }
@@ -181,7 +193,7 @@ func deleteParticipant() {
 	var j int
 	var found bool
 
-	fmt.Println("---- Delete Participant ----")
+	fmt.Println("---- DELETE PARTICIPANT ----")
 
 	fmt.Print("ID Registration : ")
 	fmt.Scan(&idSearch)
@@ -189,18 +201,25 @@ func deleteParticipant() {
 	found = false
 
 	for i = 0; i < total; i++ {
+
 		if participantData[i].id == idSearch {
+
 			for j = i; j < total-1; j++ {
+
 				participantData[j] = participantData[j+1]
 			}
+
 			total = total - 1
 			found = true
 		}
 	}
 
 	if found == true {
+
 		fmt.Println("Participant successfully deleted")
+
 	} else {
+
 		fmt.Println("ID not found")
 	}
 }
@@ -210,7 +229,7 @@ func sequentialSearch() {
 	var i int
 	var found bool
 
-	fmt.Println("=== Search Participant ===")
+	fmt.Println("---- SEQUENTIAL SEARCH ----")
 
 	fmt.Print("ID Registration : ")
 	fmt.Scan(&idSearch)
@@ -218,10 +237,13 @@ func sequentialSearch() {
 	found = false
 
 	for i = 0; i < total; i++ {
+
 		if participantData[i].id == idSearch {
+
 			fmt.Println("Data Found!")
 			fmt.Println("ID       :", participantData[i].id)
 			fmt.Println("Name     :", participantData[i].name)
+			fmt.Println("Age      :", participantData[i].age)
 			fmt.Println("Interest :", participantData[i].interest)
 
 			found = true
@@ -229,7 +251,57 @@ func sequentialSearch() {
 	}
 
 	if found == false {
+
 		fmt.Println("ID not found")
+	}
+}
+
+func binarySearch() {
+	var nameSearch string
+	var left int
+	var right int
+	var mid int
+	var found bool
+
+	insertionSortName()
+
+	fmt.Println("---- BINARY SEARCH ----")
+
+	fmt.Print("Search Name : ")
+	fmt.Scan(&nameSearch)
+
+	left = 0
+	right = total - 1
+	found = false
+
+	for left <= right {
+
+		mid = (left + right) / 2
+
+		if participantData[mid].name == nameSearch {
+
+			fmt.Println("Data Found!")
+			fmt.Println("ID       :", participantData[mid].id)
+			fmt.Println("Name     :", participantData[mid].name)
+			fmt.Println("Age      :", participantData[mid].age)
+			fmt.Println("Interest :", participantData[mid].interest)
+
+			found = true
+			left = right + 1
+
+		} else if participantData[mid].name < nameSearch {
+
+			left = mid + 1
+
+		} else {
+
+			right = mid - 1
+		}
+	}
+
+	if found == false {
+
+		fmt.Println("Data not found")
 	}
 }
 
@@ -240,12 +312,17 @@ func selectionSortID() {
 	var temp Participant
 
 	for i = 0; i < total-1; i++ {
+
 		minIndex = i
+
 		for j = i + 1; j < total; j++ {
+
 			if participantData[j].id < participantData[minIndex].id {
+
 				minIndex = j
 			}
 		}
+
 		temp = participantData[i]
 		participantData[i] = participantData[minIndex]
 		participantData[minIndex] = temp
@@ -260,78 +337,44 @@ func insertionSortName() {
 	var key Participant
 
 	for i = 1; i < total; i++ {
+
 		key = participantData[i]
 		j = i - 1
+
 		for j >= 0 && participantData[j].name > key.name {
+
 			participantData[j+1] = participantData[j]
 			j = j - 1
 		}
+
 		participantData[j+1] = key
 	}
+
 	fmt.Println("Participants sorted by Name")
-}
-
-func binarySearch() {
-	var nameSearch string
-	var left int
-	var right int
-	var mid int
-	var found bool
-
-	insertionSortName()
-
-	fmt.Println("=== Binary Search ===")
-	fmt.Print("Search Name : ")
-	fmt.Scan(&nameSearch)
-
-	left = 0
-	right = total - 1
-	found = false
-
-	for left <= right {
-		mid = (left + right) / 2
-		if participantData[mid].name == nameSearch {
-			fmt.Println("Data Found!")
-			fmt.Println("ID       :", participantData[mid].id)
-			fmt.Println("Name     :", participantData[mid].name)
-			fmt.Println("Interest :", participantData[mid].interest)
-
-			found = true
-			left = right + 1
-		} else if participantData[mid].name < nameSearch {
-			left = mid + 1
-		} else {
-			right = mid - 1
-		}
-	}
-
-	if found == false {
-		fmt.Println("Data not found")
-	}
 }
 
 func statistics() {
 	var i int
-	var design int
 	var coding int
-	var business int
+	var music int
+	var math int
 	var totalActive int
 
 	for i = 0; i < total; i++ {
-
-		if participantData[i].interest == "Desain" {
-
-			design = design + 1
-		}
 
 		if participantData[i].interest == "Coding" {
 
 			coding = coding + 1
 		}
 
-		if participantData[i].interest == "Bisnis" {
+		if participantData[i].interest == "Music" {
 
-			business = business + 1
+			music = music + 1
+		}
+
+		if participantData[i].interest == "Math" {
+
+			math = math + 1
 		}
 
 		if participantData[i].active == true {
@@ -340,11 +383,67 @@ func statistics() {
 		}
 	}
 
-	fmt.Println("=== Statistik ===")
-	fmt.Println("Desain      :", design)
+	fmt.Println("---- STATISTICS ----")
 	fmt.Println("Coding      :", coding)
-	fmt.Println("Bisnis      :", business)
-	fmt.Println("Total Aktif :", totalActive)
+	fmt.Println("Music       :", music)
+	fmt.Println("Math        :", math)
+	fmt.Println("Total Active:", totalActive)
+}
+
+func searchMenu() {
+	var choose int
+	var enter string
+
+	fmt.Println("---- SEARCH DATA ----")
+	fmt.Println("1. Sequential Search")
+	fmt.Println("2. Binary Search")
+	fmt.Print("Choose : ")
+	fmt.Scan(&choose)
+
+	if choose == 1 {
+
+		sequentialSearch()
+
+	} else if choose == 2 {
+
+		binarySearch()
+
+	} else {
+
+		fmt.Println("Menu not found")
+	}
+
+	fmt.Println()
+	fmt.Print("Type EXIT to continue : ")
+	fmt.Scan(&enter)
+}
+
+func sortMenu() {
+	var choose int
+	var enter string
+
+	fmt.Println("---- SORT DATA ----")
+	fmt.Println("1. Selection Sort ID")
+	fmt.Println("2. Insertion Sort Name")
+	fmt.Print("Choose : ")
+	fmt.Scan(&choose)
+
+	if choose == 1 {
+
+		selectionSortID()
+
+	} else if choose == 2 {
+
+		insertionSortName()
+
+	} else {
+
+		fmt.Println("Menu not found")
+	}
+
+	fmt.Println()
+	fmt.Print("Type EXIT to continue : ")
+	fmt.Scan(&enter)
 }
 
 func menu() {
@@ -355,11 +454,9 @@ func menu() {
 	fmt.Println("2. View Participants")
 	fmt.Println("3. Update Participant")
 	fmt.Println("4. Delete Participant")
-	fmt.Println("5. Sequential Search")
-	fmt.Println("6. Binary Search")
-	fmt.Println("7. Selection Sort ID")
-	fmt.Println("8. Insertion Sort Name")
-	fmt.Println("9. Statistics")
+	fmt.Println("5. Search Data")
+	fmt.Println("6. Sort Data")
+	fmt.Println("7. Statistics")
 	fmt.Println("0. Exit")
 }
 
@@ -385,7 +482,7 @@ func main() {
 
 		} else if choose == 3 {
 
-			changeParticipantStatus()
+			updateParticipant()
 
 		} else if choose == 4 {
 
@@ -393,21 +490,13 @@ func main() {
 
 		} else if choose == 5 {
 
-			sequentialSearch()
+			searchMenu()
 
 		} else if choose == 6 {
 
-			binarySearch()
+			sortMenu()
 
 		} else if choose == 7 {
-
-			selectionSortID()
-
-		} else if choose == 8 {
-
-			insertionSortName()
-
-		} else if choose == 9 {
 
 			statistics()
 
