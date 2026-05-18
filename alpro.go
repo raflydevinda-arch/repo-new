@@ -485,7 +485,9 @@ func main() {
 
 		case 4:
 
+
 			deleteParticipant()
+			
 		case 5:
 
 			searchMenu()
@@ -498,7 +500,7 @@ func main() {
 
 			statistics()
 
-		case 0 
+		case 0:
 
 			fmt.Println("DONE")
 
