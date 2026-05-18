@@ -1,4 +1,4 @@
-package main
+package  main
 
 import "fmt"
 
@@ -472,40 +472,37 @@ func main() {
 		fmt.Print("Choose Menu : ")
 		fmt.Scan(&choose)
 
-		if choose == 1 {
+		switch choose {
+		case 1:
 
 			addParticipant()
-
-		} else if choose == 2 {
+		case 2:
 
 			viewParticipants()
-
-		} else if choose == 3 {
+		case 3:
 
 			updateParticipant()
 
-		} else if choose == 4 {
+		case 4:
 
 			deleteParticipant()
-
-		} else if choose == 5 {
+		case 5:
 
 			searchMenu()
 
-		} else if choose == 6 {
+		case 6:
 
 			sortMenu()
 
-		} else if choose == 7 {
+		case 7:
 
 			statistics()
 
-		} else if choose == 0 {
+		case 0 
 
 			fmt.Println("DONE")
 
-		} else {
-
+		default:
 			fmt.Println("Menu not found")
 		}
 	}
