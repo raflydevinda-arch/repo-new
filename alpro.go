@@ -20,6 +20,7 @@ func addParticipant() {
 	var p Participant
 	var category int
 	var choice int
+	var exit string
 
 	fmt.Println("---- ADD PARTICIPANT ----")
 
@@ -111,13 +112,16 @@ func addParticipant() {
 
 	fmt.Print("Registration Date (D/M/Y) : ")
 	fmt.Scan(&p.date)
+	fmt.Println(" ")
 
 	p.active = true
 
 	participantData[total] = p
 	total = total + 1
 
-	fmt.Println("Participant successfully added")
+	fmt.Println("PARTICIPANT SUCCESSFULLY ADDED.\n")
+	fmt.Print("Type EXIT to continue : ")
+	fmt.Scan(&exit)
 }
 
 func viewParticipants() {
@@ -353,7 +357,7 @@ func insertionSortName() {
 	fmt.Println("Participants sorted by Name")
 }
 
-func statistics() {
+func printStatistics() {
 	var i int
 	var coding int
 	var music int
@@ -449,7 +453,7 @@ func sortMenu() {
 func menu() {
 
 	fmt.Println()
-	fmt.Println("===== KURSUS IN =====")
+	fmt.Println("===== WELCOME TO KursusIn =====")
 	fmt.Println("1. Add Participant")
 	fmt.Println("2. View Participants")
 	fmt.Println("3. Update Participant")
@@ -498,7 +502,7 @@ func main() {
 
 		} else if choose == 7 {
 
-			statistics()
+			printStatistics()
 
 		} else if choose == 0 {
 
