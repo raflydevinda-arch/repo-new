@@ -1,4 +1,4 @@
-package main
+package  main
 
 import "fmt"
 
@@ -54,7 +54,7 @@ func addParticipant() {
 		fmt.Print("Choose Interest : ")
 		fmt.Scan(&choice)
 
-		if choice == 1 {
+		if choice == 1 { //switch case lgi
 			p.interest = "Math"
 		} else if choice == 2 {
 			p.interest = "Physics"
@@ -81,7 +81,7 @@ func addParticipant() {
 		fmt.Print("Choose Interest : ")
 		fmt.Scan(&choice)
 
-		if choice == 1 {
+		if choice == 1 { //pakekan switch case (nested pun bisa)
 			p.interest = "Coding"
 		} else if choice == 2 {
 			p.interest = "Graphic Design"
@@ -99,7 +99,7 @@ func addParticipant() {
 		fmt.Print("Choose Interest : ")
 		fmt.Scan(&choice)
 
-		if choice == 1 {
+		if choice == 1 { git 
 			p.interest = "Music"
 		} else if choice == 2 {
 			p.interest = "Art"
@@ -357,7 +357,11 @@ func insertionSortName() {
 	fmt.Println("Participants sorted by Name")
 }
 
+<<<<<<< HEAD
 func printStatistics() {
+=======
+func statistics() { //ini tambah lagi
+>>>>>>> 2277c92b8c811d5811db5c79a9cf4a061e96ff86
 	var i int
 	var coding int
 	var music int
@@ -422,7 +426,7 @@ func searchMenu() {
 	fmt.Scan(&enter)
 }
 
-func sortMenu() {
+func sortMenu() { //ini ubah dikit
 	var choose int
 	var enter string
 
@@ -476,40 +480,38 @@ func main() {
 		fmt.Print("Choose Menu : ")
 		fmt.Scan(&choose)
 
-		if choose == 1 {
+		switch choose {
+		case 1:
 
 			addParticipant()
-
-		} else if choose == 2 {
+		case 2:
 
 			viewParticipants()
-
-		} else if choose == 3 {
+		case 3:
 
 			updateParticipant()
 
-		} else if choose == 4 {
+		case 4:
 
 			deleteParticipant()
 
-		} else if choose == 5 {
+		case 5:
 
 			searchMenu()
 
-		} else if choose == 6 {
+		case 6:
 
 			sortMenu()
 
-		} else if choose == 7 {
+		case 7:
 
 			printStatistics()
 
-		} else if choose == 0 {
+		case 0:
 
 			fmt.Println("DONE")
 
-		} else {
-
+		default:
 			fmt.Println("Menu not found")
 		}
 	}
