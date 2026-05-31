@@ -53,7 +53,7 @@ func addParticipant() {
 		fmt.Print("Choose Interest : ")
 		fmt.Scan(&choice)
 
-		if choice == 1 {
+		if choice == 1 { //switch case lgi
 			p.interest = "Math"
 		} else if choice == 2 {
 			p.interest = "Physics"
@@ -80,7 +80,7 @@ func addParticipant() {
 		fmt.Print("Choose Interest : ")
 		fmt.Scan(&choice)
 
-		if choice == 1 {
+		if choice == 1 { //pakekan switch case (nested pun bisa)
 			p.interest = "Coding"
 		} else if choice == 2 {
 			p.interest = "Graphic Design"
@@ -98,7 +98,7 @@ func addParticipant() {
 		fmt.Print("Choose Interest : ")
 		fmt.Scan(&choice)
 
-		if choice == 1 {
+		if choice == 1 { git 
 			p.interest = "Music"
 		} else if choice == 2 {
 			p.interest = "Art"
@@ -353,7 +353,7 @@ func insertionSortName() {
 	fmt.Println("Participants sorted by Name")
 }
 
-func statistics() {
+func statistics() { //ini tambah lagi
 	var i int
 	var coding int
 	var music int
@@ -418,7 +418,7 @@ func searchMenu() {
 	fmt.Scan(&enter)
 }
 
-func sortMenu() {
+func sortMenu() { //ini ubah dikit
 	var choose int
 	var enter string
 
@@ -487,7 +487,7 @@ func main() {
 
 
 			deleteParticipant()
-			
+
 		case 5:
 
 			searchMenu()
