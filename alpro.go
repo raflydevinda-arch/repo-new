@@ -15,6 +15,7 @@ type Participant struct {
 
 var participantData [MAX]Participant
 var total int
+var art, academic, technology int
 
 func addParticipant() {
 	var p Participant
@@ -23,7 +24,7 @@ func addParticipant() {
 
 	fmt.Println("---- ADD PARTICIPANT ----")
 
-	fmt.Print("ID Registration : ")
+	fmt.Print("ID Registration (6 digits) : ")
 	fmt.Scan(&p.id)
 
 	fmt.Print("Full Name : ")
@@ -53,23 +54,25 @@ func addParticipant() {
 		fmt.Print("Choose Interest : ")
 		fmt.Scan(&choice)
 
-		if choice == 1 { //switch case lgi
+		switch choice { 
+			case 1 :
 			p.interest = "Math"
-		} else if choice == 2 {
+			case 2 :
 			p.interest = "Physics"
-		} else if choice == 3 {
+			case 3 :
 			p.interest = "Biology"
-		} else if choice == 4 {
+			case 4 :
 			p.interest = "Chemistry"
-		} else if choice == 5 {
+			case 5 :
 			p.interest = "Economy"
-		} else if choice == 6 {
+			case 6 :
 			p.interest = "History"
-		} else if choice == 7 {
+			case 7 :
 			p.interest = "Sociology"
-		} else if choice == 8 {
+			case 8 :
 			p.interest = "English"
 		}
+		
 
 	} else if category == 2 {
 
@@ -80,13 +83,16 @@ func addParticipant() {
 		fmt.Print("Choose Interest : ")
 		fmt.Scan(&choice)
 
-		if choice == 1 { //pakekan switch case (nested pun bisa)
+		switch choice {
+			case 1 : //pakekan switch case (nested pun bisa)
 			p.interest = "Coding"
-		} else if choice == 2 {
+			case 2 :
 			p.interest = "Graphic Design"
-		} else if choice == 3 {
+			case 3 :
 			p.interest = "Data & Office"
 		}
+
+		
 
 	} else if category == 3 {
 
@@ -98,15 +104,18 @@ func addParticipant() {
 		fmt.Print("Choose Interest : ")
 		fmt.Scan(&choice)
 
-		if choice == 1 { git 
+		switch choice {
+		case 1:
 			p.interest = "Music"
-		} else if choice == 2 {
+		case 2:
 			p.interest = "Art"
-		} else if choice == 3 {
+		case 3:
 			p.interest = "Photography"
-		} else if choice == 4 {
+		case 4:
 			p.interest = "Cinematography"
 		}
+		
+		
 	}
 
 	fmt.Print("Registration Date (D/M/Y) : ")
@@ -116,9 +125,22 @@ func addParticipant() {
 
 	participantData[total] = p
 	total = total + 1
-
+	countCategory()
 	fmt.Println("Participant successfully added")
 }
+
+func countCategory() { //masih belum siap (experimnent aja dulu)
+	var art, academic, technology, choice int
+	
+	if  choice == 1 {
+		academic = academic + 1
+	}else if choice == 2 {
+		technology = technology + 1
+	}else if choice == 3 {
+		art = art + 1
+	}
+}	//ini masalahnya karena variabel choice itu cuma ada di fungsi addParticipant, jadi dia ga bisa diakses di fungsi countCategory. Solusinya, kita bisa buat variabel global untuk menyimpan pilihan kategori, atau kita bisa langsung update countCategory di dalam fungsi addParticipant setelah kita menentukan kategori yang dipilih.
+
 
 func viewParticipants() {
 	var i int
@@ -158,7 +180,25 @@ func updateParticipant() {
 	fmt.Print("ID Registration : ")
 	fmt.Scan(&idSearch)
 
-	
+	found = false
+	i = 0
+	for i < total {
+
+		if participantData[i].id == idSearch {
+
+			fmt.Print("New Age : ")
+			fmt.Scan(&participantData[i].age)
+
+			fmt.Print("New Interest : ")
+			fmt.Scan(&participantData[i].interest)
+
+			fmt.Print("New Date (D/M/Y) : ")
+			fmt.Scan(&participantData[i].date)
+
+			found = true
+		}
+		i++
+	}
 
 	if found == true {
 
@@ -181,8 +221,21 @@ func deleteParticipant() {
 	fmt.Print("ID Registration : ")
 	fmt.Scan(&idSearch)
 
-	
+	found = false
+	i = 0
+	for i < total {
+
+		if participantData[i].id == idSearch {
+
+			for j = i; j < total-1; j++ {
+
+				participantData[j] = participantData[j+1]
+			}
+
+			total = total - 1
+			found = true
 		}
+		i++
 	}
 
 	if found == true {
@@ -324,43 +377,25 @@ func insertionSortName() {
 	fmt.Println("Participants sorted by Name")
 }
 
-func statistics() { //ini tambah lagi
+func statistics() {
 	var i int
-	var coding int
-	var music int
-	var math int
 	var totalActive int
 
 	for i = 0; i < total; i++ {
 
-		if participantData[i].interest == "Coding" {
-
-			coding = coding + 1
-		}
-
-		if participantData[i].interest == "Music" {
-
-			music = music + 1
-		}
-
-		if participantData[i].interest == "Math" {
-
-			math = math + 1
-		}
-
+		
 		if participantData[i].active == true {
 
 			totalActive = totalActive + 1
 		}
 	}
-
+	
 	fmt.Println("---- STATISTICS ----")
-	fmt.Println("Coding      :", coding)
-	fmt.Println("Music       :", music)
-	fmt.Println("Math        :", math)
-	fmt.Println("Total Active:", totalActive)
+	fmt.Println("Academic    :", academic)
+	fmt.Println("Technology  :", technology)
+	fmt.Println("Arts/Creativity :", art)
+	fmt.Println("Total Active:", totalActive) 
 }
-
 func searchMenu() {
 	var choose int
 	var enter string
