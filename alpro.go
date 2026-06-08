@@ -9,42 +9,30 @@ type Participant struct {
 	name     string
 	age      int
 	interest string
+	category int
 	date     string
 	active   bool
 }
 
 var participantData [MAX]Participant
 var total int
-var art, academic, technology int
+//var art, academic, technology int
 
-func addParticipant() { //this function is used to add a new participant to the participantData array.
-//  It will ask the user to input the participant's ID, name, age, interest category, and registration date.
-//  The function will also update the total number of participants and count the number of participants in each category.
+func interestCategory() string{
 	var p Participant
-	var category int
 	var choice int
 
-	fmt.Println("---- ADD PARTICIPANT ----")
-
-	fmt.Print("ID Registration (6 digits) : ")
-	fmt.Scan(&p.id)
-
-	fmt.Print("Full Name : ")
-	fmt.Scan(&p.name)
-
-	fmt.Print("Age : ")
-	fmt.Scan(&p.age)
-
-	fmt.Println(" ~ Interest Category ~")
+	fmt.Println()
+	fmt.Println("------ Interest Category ------")
 	fmt.Println("1. Academic")
 	fmt.Println("2. Technology")
 	fmt.Println("3. Art / Creativity")
 	fmt.Print("Choose Category : ")
-	fmt.Scan(&category)
+	fmt.Scan(&p.category)
 
-	if category == 1 {
-
-		fmt.Println(" ~ Academic ~ ")
+	if p.category == 1 {
+		fmt.Println()
+		fmt.Println(" ---- Academic ---- ")
 		fmt.Println("1. Math")
 		fmt.Println("2. Physics")
 		fmt.Println("3. Biology")
@@ -57,6 +45,7 @@ func addParticipant() { //this function is used to add a new participant to the 
 		fmt.Scan(&choice)
 
 		switch choice { 
+
 			case 1 :
 			p.interest = "Math"
 			case 2 :
@@ -76,9 +65,9 @@ func addParticipant() { //this function is used to add a new participant to the 
 		}
 		
 
-	} else if category == 2 {
-
-		fmt.Println(" ~ Technology ~ ")
+	} else if p.category == 2 {
+		fmt.Println()
+		fmt.Println(" ---- Technology ---- ")
 		fmt.Println("1. Coding")
 		fmt.Println("2. Graphic Design")
 		fmt.Println("3. Data & Office")
@@ -96,9 +85,9 @@ func addParticipant() { //this function is used to add a new participant to the 
 
 		
 
-	} else if category == 3 {
-
-		fmt.Println(" ~ Art / Creativity ~ ")
+	} else if p.category == 3 {
+		fmt.Println()
+		fmt.Println(" ---- Art / Creativity ---- ")
 		fmt.Println("1. Music")
 		fmt.Println("2. Art")
 		fmt.Println("3. Photography")
@@ -119,6 +108,32 @@ func addParticipant() { //this function is used to add a new participant to the 
 		
 		
 	}
+	
+	return p.interest
+	
+}
+
+func addParticipant() { 
+	//this function is used to add a new participant to the participantData array.
+	//It will ask the user to input the participant's ID, name, age, interest category, and registration date.
+	//The function will also update the total number of participants and count the number of participants in each category.
+	var p Participant
+	var enter string
+
+	fmt.Println()
+	fmt.Println("------ ADD PARTICIPANT ------")
+
+	fmt.Print("ID Registration (6 digits) : ")
+	fmt.Scan(&p.id)
+
+	fmt.Print("Full Name                  : ")
+	fmt.Scan(&p.name)
+
+	fmt.Print("Age                        : ")
+	fmt.Scan(&p.age)
+	p.interest = interestCategory()
+	
+	
 
 	fmt.Print("Registration Date (D/M/Y) : ")
 	fmt.Scan(&p.date)
@@ -127,45 +142,37 @@ func addParticipant() { //this function is used to add a new participant to the 
 
 	participantData[total] = p
 	total = total + 1
-	countCategory()
-	fmt.Println("Participant successfully added")
-}
-
-
-func countCategory() { //masih belum siap (experimnent aja dulu)
-	var art, academic, technology, choice int
+	fmt.Println()
+	fmt.Println(">> PARTICIPANT SUCESFULLY ADDED!")
 	
-	if  choice == 1 {
-		academic = academic + 1
-	}else if choice == 2 {
-		technology = technology + 1
-	}else if choice == 3 {
-		art = art + 1
-	}
-}	//ini masalahnya karena variabel choice itu cuma ada di fungsi addParticipant, jadi dia ga bisa diakses di fungsi countCategory. Solusinya, kita bisa buat variabel global untuk menyimpan pilihan kategori, atau kita bisa langsung update countCategory di dalam fungsi addParticipant setelah kita menentukan kategori yang dipilih.
 
+	fmt.Println()
+	fmt.Print("Type EXIT to continue : ")
+	fmt.Scan(&enter)
+}
 
 func viewParticipants() {
 	//this function is used to display the data of all participants in the participantData array.
 	var i int
 	var enter string
 
-	fmt.Println("---- PARTICIPANT DATA ----")
+	fmt.Println("----------- PARTICIPANTS DATA ------------")
 
 	if total == 0 {
 
-		fmt.Println("No data available")
+		fmt.Println("NO DATA AVAILABLE")
 
 	} else {
 
 		for i = 0; i < total; i++ {
-
-			fmt.Println("-------------------")
-			fmt.Println("ID       :", participantData[i].id)
-			fmt.Println("Name     :", participantData[i].name)
-			fmt.Println("Age      :", participantData[i].age)
-			fmt.Println("Interest :", participantData[i].interest)
+			fmt.Println()
+			fmt.Println("------------------------------------------")
+			fmt.Println("ID                :", participantData[i].id)
+			fmt.Println("Name              :", participantData[i].name)
+			fmt.Println("Age               :", participantData[i].age)
+			fmt.Println("Interest          :", participantData[i].interest)
 			fmt.Println("Registration Date :", participantData[i].date)
+			fmt.Println("------------------------------------------")
 		}
 	}
 
@@ -179,10 +186,11 @@ func updateParticipant() {
 	var idSearch int
 	var i int
 	var found bool
+	var enter string
+	fmt.Println()
+	fmt.Println("------ UPDATE PARTICIPANT ------")
 
-	fmt.Println("---- UPDATE PARTICIPANT ----")
-
-	fmt.Print("ID Registration : ")
+	fmt.Print("ID Registration    : ")
 	fmt.Scan(&idSearch)
 
 	found = false
@@ -191,13 +199,13 @@ func updateParticipant() {
 
 		if participantData[i].id == idSearch {
 
-			fmt.Print("New Age : ")
+			fmt.Print("New Age            : ")
 			fmt.Scan(&participantData[i].age)
 
-			fmt.Print("New Interest : ")
-			fmt.Scan(&participantData[i].interest)
+			fmt.Print("Input New Interest :")
+			participantData[i].interest = interestCategory()
 
-			fmt.Print("New Date (D/M/Y) : ")
+			fmt.Print("New Date (D/M/Y)   : ")
 			fmt.Scan(&participantData[i].date)
 
 			found = true
@@ -206,13 +214,17 @@ func updateParticipant() {
 	}
 
 	if found == true {
-
-		fmt.Println("Participant successfully updated")
+		fmt.Println()
+		fmt.Println(">> PARTICIPANT SUCESFULLY UPDATED!")
 
 	} else {
-
-		fmt.Println("Participant not found")
+		fmt.Println()
+		fmt.Println(">> PARTICIPANT NOT FOUND")
 	}
+
+	fmt.Println()
+	fmt.Print("Type EXIT to continue : ")
+	fmt.Scan(&enter)
 }
 
 func deleteParticipant() {
@@ -221,8 +233,9 @@ func deleteParticipant() {
 	var i int
 	var j int
 	var found bool
-
-	fmt.Println("---- DELETE PARTICIPANT ----")
+	var enter string
+	fmt.Println()
+	fmt.Println("------ DELETE PARTICIPANT ------")
 
 	fmt.Print("ID Registration : ")
 	fmt.Scan(&idSearch)
@@ -245,13 +258,16 @@ func deleteParticipant() {
 	}
 
 	if found == true {
-
-		fmt.Println("Participant successfully deleted")
+		fmt.Println()
+		fmt.Println(">> PARTICIPANT SUCESFULLY DELETED")
 
 	} else {
-
-		fmt.Println("ID not found")
+		fmt.Println()
+		fmt.Println(">> ID NOT FOUND")
 	}
+	fmt.Println()
+	fmt.Print("Type EXIT to continue : ")
+	fmt.Scan(&enter)
 }
 
 func sequentialSearch() {
@@ -259,8 +275,9 @@ func sequentialSearch() {
 	var idSearch int
 	var i int
 	var found bool
+	var enter string
 
-	fmt.Println("---- SEQUENTIAL SEARCH ----")
+	fmt.Println("------ SEQUENTIAL SEARCH ------")
 
 	fmt.Print("ID Registration : ")
 	fmt.Scan(&idSearch)
@@ -271,7 +288,7 @@ func sequentialSearch() {
 
 		if participantData[i].id == idSearch {
 
-			fmt.Println("Data Found!")
+			fmt.Println(">> DATA FOUND!")
 			fmt.Println("ID       :", participantData[i].id)
 			fmt.Println("Name     :", participantData[i].name)
 			fmt.Println("Age      :", participantData[i].age)
@@ -282,9 +299,12 @@ func sequentialSearch() {
 	}
 
 	if found == false {
-
-		fmt.Println("ID not found")
+		fmt.Println()
+		fmt.Println(">> ID NOT FOUND")
 	}
+	fmt.Println()
+	fmt.Print("Type EXIT to continue : ")
+	fmt.Scan(&enter)
 }
 
 func binarySearch() {
@@ -294,10 +314,11 @@ func binarySearch() {
 	var right int
 	var mid int
 	var found bool
+	var enter string
 
 	insertionSortName()
 
-	fmt.Println("---- BINARY SEARCH ----")
+	fmt.Println("------ BINARY SEARCH ------")
 
 	fmt.Print("Search Name : ")
 	fmt.Scan(&nameSearch)
@@ -312,7 +333,7 @@ func binarySearch() {
 
 		if participantData[mid].name == nameSearch {
 
-			fmt.Println("Data Found!")
+			fmt.Println(">> DATA FOUND!")
 			fmt.Println("ID       :", participantData[mid].id)
 			fmt.Println("Name     :", participantData[mid].name)
 			fmt.Println("Age      :", participantData[mid].age)
@@ -332,9 +353,13 @@ func binarySearch() {
 	}
 
 	if found == false {
-
-		fmt.Println("Data not found")
+		fmt.Println()
+		fmt.Println(">> DATA NOT FOUND")
 	}
+
+	fmt.Println()
+	fmt.Print("Type EXIT to continue : ")
+	fmt.Scan(&enter)
 }
 
 func selectionSortID() {
@@ -362,13 +387,14 @@ func selectionSortID() {
 		participantData[minIndex] = temp
 	}
 
-	fmt.Println("Participants sorted by ID")
+	fmt.Println(">> Participants sorted by ID.")
 }
 
 func insertionSortName() {
 
 	var i int
 	var j int
+	var enter string
 	var key Participant
 
 	for i = 1; i < total; i++ {
@@ -385,40 +411,64 @@ func insertionSortName() {
 		participantData[j+1] = key
 	}
 
-	fmt.Println("Participants sorted by Name")
+	fmt.Println(">> Participants sorted by Name.")
+	fmt.Println()
+	fmt.Print("Type EXIT to continue : ")
+	fmt.Scan(&enter)
 }
 
 func statistics() {
 	//this function is used to display the statistics of the participants in the participantData array,
-	//  such as the number of participants in each category and the total number of active participants.
-	var i int
+	//  such as the number of participants in each categ
 	var totalActive int
+	var academic, technology, art int
+	var enter string
 
-	for i = 0; i < total; i++ {
+	for i := 0; i < total; i++ {
 
 		
 		if participantData[i].active == true {
 
 			totalActive = totalActive + 1
 		}
+			if participantData[i].category == 1 {
+
+				academic = academic + 1
+
+			} 
+			if participantData[i].category == 2 {
+
+				technology = technology + 1
+
+			}
+			if participantData[i].category == 3 {
+
+				art = art + 1
+			}
 	}
-	
-	fmt.Println("---- STATISTICS ----")
+	fmt.Println()
+	fmt.Println("------- STATISTICS -------")
 	fmt.Println("Academic    :", academic)
 	fmt.Println("Technology  :", technology)
 	fmt.Println("Arts/Creativity :", art)
-	fmt.Println("Total Active:", totalActive) 
+	fmt.Println("Total Student Active:", totalActive) 
+	fmt.Println("--------------------------")
+
+	fmt.Println()
+	fmt.Print("Type EXIT to continue : ")
+	fmt.Scan(&enter)
 }
 func searchMenu() {
 	//this function is used to display the search menu and call the appropriate search function based on the user's choice.
 	var choose int
 	var enter string
 
-	fmt.Println("---- SEARCH DATA ----")
+	fmt.Println("------ SEARCH DATA ------")
 	fmt.Println("1. Sequential Search")
 	fmt.Println("2. Binary Search")
 	fmt.Print("Choose : ")
 	fmt.Scan(&choose)
+	fmt.Println("-------------------------")
 
 	if choose == 1 {
 
@@ -430,7 +480,7 @@ func searchMenu() {
 
 	} else {
 
-		fmt.Println("Menu not found")
+		fmt.Println(">> MENU NOT FOUND!")
 	}
 
 	fmt.Println()
@@ -439,7 +489,8 @@ func searchMenu() {
 }
 
 func sortMenu() { 
-	//this function is used to display the sort menu and call the appropriate sort function based on the user's choice.
+	//this function is used to display the sort menu 
+	// and call the appropriate sort function based on the user's choice.
 	var choose int
 	var enter string
 
@@ -459,7 +510,7 @@ func sortMenu() {
 
 	} else {
 
-		fmt.Println("Menu not found")
+		fmt.Println(">> MENU NOT FOUND!")
 	}
 
 	fmt.Println()
@@ -525,7 +576,7 @@ func main() {
 			fmt.Println("Bye-byeee. See you soonn~~")
 
 		default:
-			fmt.Println("Menu not found")
+			fmt.Println(">> MENU NOT FOUND!")
 		}
 	}
 }
