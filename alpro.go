@@ -17,7 +17,9 @@ var participantData [MAX]Participant
 var total int
 var art, academic, technology int
 
-func addParticipant() {
+func addParticipant() { //this function is used to add a new participant to the participantData array.
+//  It will ask the user to input the participant's ID, name, age, interest category, and registration date.
+//  The function will also update the total number of participants and count the number of participants in each category.
 	var p Participant
 	var category int
 	var choice int
@@ -129,6 +131,7 @@ func addParticipant() {
 	fmt.Println("Participant successfully added")
 }
 
+
 func countCategory() { //masih belum siap (experimnent aja dulu)
 	var art, academic, technology, choice int
 	
@@ -143,6 +146,7 @@ func countCategory() { //masih belum siap (experimnent aja dulu)
 
 
 func viewParticipants() {
+	//this function is used to display the data of all participants in the participantData array.
 	var i int
 	var enter string
 
@@ -171,6 +175,7 @@ func viewParticipants() {
 }
 
 func updateParticipant() {
+	//this function is used to update the data of a participant in the participantData array.
 	var idSearch int
 	var i int
 	var found bool
@@ -211,6 +216,7 @@ func updateParticipant() {
 }
 
 func deleteParticipant() {
+	//this function is used to delete a participant from the participantData array.
 	var idSearch int
 	var i int
 	var j int
@@ -249,6 +255,7 @@ func deleteParticipant() {
 }
 
 func sequentialSearch() {
+	//this function is used to search for a participant in the participantData array using the sequential search algorithm.
 	var idSearch int
 	var i int
 	var found bool
@@ -281,6 +288,7 @@ func sequentialSearch() {
 }
 
 func binarySearch() {
+	//this function is used to search for a participant in the participantData array using the binary search algorithm.
 	var nameSearch string
 	var left int
 	var right int
@@ -330,6 +338,8 @@ func binarySearch() {
 }
 
 func selectionSortID() {
+	//this function is used to sort the participants in the participantData array by their ID using the selection sort algorithm
+	//  in increasing order.
 	var i int
 	var j int
 	var minIndex int
@@ -356,6 +366,7 @@ func selectionSortID() {
 }
 
 func insertionSortName() {
+
 	var i int
 	var j int
 	var key Participant
@@ -378,6 +389,8 @@ func insertionSortName() {
 }
 
 func statistics() {
+	//this function is used to display the statistics of the participants in the participantData array,
+	//  such as the number of participants in each category and the total number of active participants.
 	var i int
 	var totalActive int
 
@@ -397,6 +410,7 @@ func statistics() {
 	fmt.Println("Total Active:", totalActive) 
 }
 func searchMenu() {
+	//this function is used to display the search menu and call the appropriate search function based on the user's choice.
 	var choose int
 	var enter string
 
@@ -424,7 +438,8 @@ func searchMenu() {
 	fmt.Scan(&enter)
 }
 
-func sortMenu() { //ini ubah dikit
+func sortMenu() { 
+	//this function is used to display the sort menu and call the appropriate sort function based on the user's choice.
 	var choose int
 	var enter string
 
@@ -507,7 +522,7 @@ func main() {
 
 		case 0:
 
-			fmt.Println("DONE")
+			fmt.Println("Bye-byeee. See you soonn~~")
 
 		default:
 			fmt.Println("Menu not found")
