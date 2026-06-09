@@ -1,4 +1,4 @@
-package  main
+package main
 
 import "fmt"
 
@@ -16,10 +16,11 @@ type Participant struct {
 
 var participantData [MAX]Participant
 var total int
+
 //var art, academic, technology int
 
-func interestCategory() string{
-	var p Participant
+
+func interestCategory(p *Participant) {
 	var choice int
 
 	fmt.Println()
@@ -28,6 +29,7 @@ func interestCategory() string{
 	fmt.Println("2. Technology")
 	fmt.Println("3. Art / Creativity")
 	fmt.Print("Choose Category : ")
+
 	fmt.Scan(&p.category)
 
 	if p.category == 1 {
@@ -44,26 +46,25 @@ func interestCategory() string{
 		fmt.Print("Choose Interest : ")
 		fmt.Scan(&choice)
 
-		switch choice { 
+		switch choice {
 
-			case 1 :
+		case 1:
 			p.interest = "Math"
-			case 2 :
+		case 2:
 			p.interest = "Physics"
-			case 3 :
+		case 3:
 			p.interest = "Biology"
-			case 4 :
+		case 4:
 			p.interest = "Chemistry"
-			case 5 :
+		case 5:
 			p.interest = "Economy"
-			case 6 :
+		case 6:
 			p.interest = "History"
-			case 7 :
+		case 7:
 			p.interest = "Sociology"
-			case 8 :
+		case 8:
 			p.interest = "English"
 		}
-		
 
 	} else if p.category == 2 {
 		fmt.Println()
@@ -75,15 +76,13 @@ func interestCategory() string{
 		fmt.Scan(&choice)
 
 		switch choice {
-			case 1 : //pakekan switch case (nested pun bisa)
+		case 1: //pakekan switch case (nested pun bisa)
 			p.interest = "Coding"
-			case 2 :
+		case 2:
 			p.interest = "Graphic Design"
-			case 3 :
+		case 3:
 			p.interest = "Data & Office"
 		}
-
-		
 
 	} else if p.category == 3 {
 		fmt.Println()
@@ -105,15 +104,14 @@ func interestCategory() string{
 		case 4:
 			p.interest = "Cinematography"
 		}
-		
-		
+
 	}
+
 	
-	return p.interest
-	
+
 }
 
-func addParticipant() { 
+func addParticipant() {
 	//this function is used to add a new participant to the participantData array.
 	//It will ask the user to input the participant's ID, name, age, interest category, and registration date.
 	//The function will also update the total number of participants and count the number of participants in each category.
@@ -131,20 +129,19 @@ func addParticipant() {
 
 	fmt.Print("Age                        : ")
 	fmt.Scan(&p.age)
-	p.interest = interestCategory()
-	
-	
 
 	fmt.Print("Registration Date (D/M/Y) : ")
 	fmt.Scan(&p.date)
 
-	p.active = true
+	interestCategory(&p)
 
+	
+
+	p.active = true
 	participantData[total] = p
 	total = total + 1
 	fmt.Println()
-	fmt.Println(">> PARTICIPANT SUCESFULLY ADDED!")
-	
+	fmt.Println(">> PARTICIPANT SUCCESSFULLY ADDED!")
 
 	fmt.Println()
 	fmt.Print("Type EXIT to continue : ")
@@ -187,6 +184,7 @@ func updateParticipant() {
 	var i int
 	var found bool
 	var enter string
+	
 	fmt.Println()
 	fmt.Println("------ UPDATE PARTICIPANT ------")
 
@@ -202,11 +200,16 @@ func updateParticipant() {
 			fmt.Print("New Age            : ")
 			fmt.Scan(&participantData[i].age)
 
-			fmt.Print("Input New Interest :")
-			participantData[i].interest = interestCategory()
-
 			fmt.Print("New Date (D/M/Y)   : ")
 			fmt.Scan(&participantData[i].date)
+
+			
+
+			fmt.Print("Input New Interest :")
+			
+			interestCategory(&participantData[i])
+
+			
 
 			found = true
 		}
@@ -426,32 +429,32 @@ func statistics() {
 
 	for i := 0; i < total; i++ {
 
-		
+		fmt.Printf("ID: %d, Name: %s, Age: %d, Interest: %s\n", participantData[i].id, participantData[i].name, participantData[i].age, participantData[i].interest)
 		if participantData[i].active == true {
 
 			totalActive = totalActive + 1
 		}
-			if participantData[i].category == 1 {
+		if participantData[i].category == 1 {
 
-				academic = academic + 1
+			academic = academic + 1
 
-			} 
-			if participantData[i].category == 2 {
+		}
+		if participantData[i].category == 2 {
 
-				technology = technology + 1
+			technology = technology + 1
 
-			}
-			if participantData[i].category == 3 {
+		}
+		if participantData[i].category == 3 {
 
-				art = art + 1
-			}
+			art = art + 1
+		}
 	}
 	fmt.Println()
 	fmt.Println("------- STATISTICS -------")
 	fmt.Println("Academic    :", academic)
 	fmt.Println("Technology  :", technology)
 	fmt.Println("Arts/Creativity :", art)
-	fmt.Println("Total Student Active:", totalActive) 
+	fmt.Println("Total Student Active:", totalActive)
 	fmt.Println("--------------------------")
 
 	fmt.Println()
@@ -488,8 +491,8 @@ func searchMenu() {
 	fmt.Scan(&enter)
 }
 
-func sortMenu() { 
-	//this function is used to display the sort menu 
+func sortMenu() {
+	//this function is used to display the sort menu
 	// and call the appropriate sort function based on the user's choice.
 	var choose int
 	var enter string
@@ -556,7 +559,7 @@ func main() {
 			updateParticipant()
 
 		case 4:
-			
+
 			deleteParticipant()
 
 		case 5:
