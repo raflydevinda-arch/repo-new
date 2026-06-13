@@ -17,11 +17,6 @@ type Participant struct {
 var participantData [MAX]Participant
 var total int
 
-<<<<<<< HEAD
-=======
-//var art, academic, technology int
-
->>>>>>> 17e6f6cd333767e48ba31ca8655531698b0bd315
 func interestCategory(p *Participant) {
 	var choice int
 	//this function is used to display the interest category menu and ask the user to 
