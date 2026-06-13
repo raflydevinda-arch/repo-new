@@ -17,6 +17,11 @@ type Participant struct {
 var participantData [MAX]Participant
 var total int
 
+<<<<<<< HEAD
+=======
+//var art, academic, technology int
+
+>>>>>>> 17e6f6cd333767e48ba31ca8655531698b0bd315
 func interestCategory(p *Participant) {
 	var choice int
 	//this function is used to display the interest category menu and ask the user to 
@@ -105,8 +110,6 @@ func interestCategory(p *Participant) {
 
 	}
 
-	
-
 }
 
 func addParticipant() {
@@ -130,10 +133,9 @@ func addParticipant() {
 
 	fmt.Print("Registration Date (D/M/Y) : ")
 	fmt.Scan(&p.date)
+	fmt.Println(" ")
 
 	interestCategory(&p)
-
-	
 
 	p.active = true
 	participantData[total] = p
@@ -182,7 +184,7 @@ func updateParticipant() {
 	var i int
 	var found bool
 	var enter string
-	
+
 	fmt.Println()
 	fmt.Println("------ UPDATE PARTICIPANT ------")
 
@@ -201,13 +203,9 @@ func updateParticipant() {
 			fmt.Print("New Date (D/M/Y)   : ")
 			fmt.Scan(&participantData[i].date)
 
-			
-
 			fmt.Print("Input New Interest :")
-			
-			interestCategory(&participantData[i])
 
-			
+			interestCategory(&participantData[i])
 
 			found = true
 		}
@@ -428,6 +426,8 @@ func statistics() {
 	var academic, technology, art int
 	var enter string
 
+	fmt.Println()
+	fmt.Println("------- PARTICIPANTS DATA -------")
 	for i := 0; i < total; i++ {
 
 		fmt.Printf("ID: %d, Name: %s, Age: %d, Interest: %s\n", participantData[i].id, participantData[i].name, participantData[i].age, participantData[i].interest)
@@ -526,7 +526,7 @@ func sortMenu() {
 func menu() {
 // shows the main menu and helps user to choose desired menu
 	fmt.Println()
-	fmt.Println("===== KURSUS IN =====")
+	fmt.Println("===== WELCOME TO KursusIn =====")
 	fmt.Println("1. Add Participant")
 	fmt.Println("2. View Participants")
 	fmt.Println("3. Update Participant")
@@ -561,7 +561,6 @@ func main() {
 			updateParticipant()
 
 		case 4:
-
 			deleteParticipant()
 
 		case 5:
