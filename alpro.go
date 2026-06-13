@@ -162,24 +162,6 @@ func updateParticipant() {
 	fmt.Print("ID Registration : ")
 	fmt.Scan(&idSearch)
 
-	found = false
-
-	for i = 0; i < total; i++ {
-
-		if participantData[i].id == idSearch {
-
-			fmt.Print("New Age : ")
-			fmt.Scan(&participantData[i].age)
-
-			fmt.Print("New Interest : ")
-			fmt.Scan(&participantData[i].interest)
-
-			fmt.Print("New Date (D/M/Y) : ")
-			fmt.Scan(&participantData[i].date)
-
-			found = true
-		}
-	}
 
 	if found == true {
 
@@ -202,19 +184,7 @@ func deleteParticipant() {
 	fmt.Print("ID Registration : ")
 	fmt.Scan(&idSearch)
 
-	found = false
-
-	for i = 0; i < total; i++ {
-
-		if participantData[i].id == idSearch {
-
-			for j = i; j < total-1; j++ {
-
-				participantData[j] = participantData[j+1]
-			}
-
-			total = total - 1
-			found = true
+	
 		}
 	}
 
@@ -293,7 +263,7 @@ func binarySearch() {
 			found = true
 			left = right + 1
 
-		} else if participantData[mid].name < nameSearch {
+		} else if participantData[mid].name > nameSearch {
 
 			left = mid + 1
 
@@ -492,7 +462,11 @@ func main() {
 			updateParticipant()
 
 		case 4:
+<<<<<<< HEAD
 
+=======
+			
+>>>>>>> aa0c94087d16406feedc3d346c2721f297796e84
 			deleteParticipant()
 
 		case 5:
