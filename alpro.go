@@ -17,12 +17,10 @@ type Participant struct {
 var participantData [MAX]Participant
 var total int
 
-//var art, academic, technology int
-
-
 func interestCategory(p *Participant) {
 	var choice int
-
+	//this function is used to display the interest category menu and ask the user to 
+	// choose a category and an interest for the participant.
 	fmt.Println()
 	fmt.Println("------ Interest Category ------")
 	fmt.Println("1. Academic")
@@ -76,7 +74,7 @@ func interestCategory(p *Participant) {
 		fmt.Scan(&choice)
 
 		switch choice {
-		case 1: //pakekan switch case (nested pun bisa)
+		case 1: 
 			p.interest = "Coding"
 		case 2:
 			p.interest = "Graphic Design"
@@ -311,7 +309,8 @@ func sequentialSearch() {
 }
 
 func binarySearch() {
-	//this function is used to search for a participant in the participantData array using the binary search algorithm.
+	//this function is used to search for a participant in the participantData 
+	// array using the binary search algorithm.
 	var nameSearch string
 	var left int
 	var right int
@@ -366,7 +365,8 @@ func binarySearch() {
 }
 
 func selectionSortID() {
-	//this function is used to sort the participants in the participantData array by their ID using the selection sort algorithm
+	//this function is used to sort the participants in the participantData 
+	// array by their ID using the selection sort algorithm
 	//  in increasing order.
 	var i int
 	var j int
@@ -394,7 +394,8 @@ func selectionSortID() {
 }
 
 func insertionSortName() {
-
+//this function is used to sort the participants in the participantData array by their name using the insertion sort algorithm
+// in increasingalphabetical order.
 	var i int
 	var j int
 	var enter string
@@ -449,8 +450,8 @@ func statistics() {
 			art = art + 1
 		}
 	}
-	fmt.Println()
-	fmt.Println("------- STATISTICS -------")
+	fmt.Println() //this part shows the number of active students in each category
+	fmt.Println("------- STATISTICS -------") 
 	fmt.Println("Academic    :", academic)
 	fmt.Println("Technology  :", technology)
 	fmt.Println("Arts/Creativity :", art)
@@ -462,7 +463,8 @@ func statistics() {
 	fmt.Scan(&enter)
 }
 func searchMenu() {
-	//this function is used to display the search menu and call the appropriate search function based on the user's choice.
+	//this function is used to display the search menu and call the
+	//  appropriate search function based on the user's choice.
 	var choose int
 	var enter string
 
@@ -522,7 +524,7 @@ func sortMenu() {
 }
 
 func menu() {
-
+// shows the main menu and helps user to choose desired menu
 	fmt.Println()
 	fmt.Println("===== KURSUS IN =====")
 	fmt.Println("1. Add Participant")
